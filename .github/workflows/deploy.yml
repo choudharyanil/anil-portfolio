@@ -2,7 +2,10 @@ name: Deploy Flutter Web to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+
+permissions:
+  contents: write    # Required so GitHub Actions can push to gh-pages
 
 jobs:
   build:
@@ -17,10 +20,7 @@ jobs:
         with:
           channel: stable
 
-      - name: Enable Flutter web
-        run: flutter config --enable-web
-
-      - name: Get dependencies
+      - name: Install dependencies
         run: flutter pub get
 
       - name: Build Flutter web
@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
-          folder: build/web
+          branch: gh-pages        # deployment branch
+          folder: build/web       # output folder
