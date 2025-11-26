@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:portfolio_app/utils/app_images.dart';
 import 'package:portfolio_app/utils/app_strings.dart';
 import 'package:portfolio_app/widgets/gradientbutton.dart';
 import '../themes/neon_theme.dart';
@@ -55,15 +56,15 @@ class ProfileCard extends StatelessWidget {
               Text(title, style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.bodyTextColor)),
               const SizedBox(height: 20),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _socialIcon(Icons.facebook, context),
-                  _socialIcon(Icons.link, context),
-                  _socialIcon(Icons.code, context),
-                  _socialIcon(Icons.person, context),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     _socialIcon(Icons.facebook, context),
+              //     _socialIcon(Icons.link, context),
+              //     _socialIcon(Icons.code, context),
+              //     _socialIcon(Icons.person, context),
+              //   ],
+              // ),
 
               const SizedBox(height: 22),
               _info(Icons.phone, AppStrings.phone, context),
@@ -91,9 +92,11 @@ class ProfileCard extends StatelessWidget {
             child: Container(
               height: 120,
               width: 120,
+              
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: neon.gradient,
+                image: DecorationImage(image: AssetImage(AppImages.profileImg),fit: BoxFit.cover),
                 boxShadow: [
                   BoxShadow(
                     color: neon.glowColor.withValues(alpha: .7),
@@ -102,6 +105,7 @@ class ProfileCard extends StatelessWidget {
                   )
                 ],
               ),
+
             ),
           ),
         ),
@@ -123,6 +127,7 @@ class ProfileCard extends StatelessWidget {
             width: 110,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
+              image: DecorationImage(image: AssetImage(AppImages.profileImg),fit: BoxFit.cover),
               gradient: theme.extension<NeonTheme>()!.gradient,
             ),
           ),
@@ -200,7 +205,7 @@ class ProfileCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
-          Icon(icon, color: AppColors.primary),
+          Icon(icon, color: Colors.pinkAccent),
           const SizedBox(width: 10),
           Expanded(child: Text(text, style: theme.textTheme.bodyMedium)),
         ],

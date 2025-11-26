@@ -12,7 +12,7 @@ class AppStrings {
   static const linkedInURL =
       "https://www.linkedin.com/in/anil-kumar-979b1810a/";
   static const githubURL = "https://www.linkedin.com/in/anil-kumar-979b1810a/";
-  static const whatsAppUrl = "https://wa.me/7018424315";
+  static const whatsAppUrl = "https://wa.me/8988293197";
 
   // ------------------ ABOUT ME ------------------
   static const aboutMe =

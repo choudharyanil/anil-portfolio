@@ -55,7 +55,7 @@ class PortfolioController extends GetxController {
         image: AppImages.zahra,
         playStore:
             "https://play.google.com/store/apps/details?id=com.elintminds.zahra",
-        appStore: "https://apps.apple.com/in/app/the-zahratrust/id16083080682",
+        appStore: "https://apps.apple.com/in/app/the-zahra-trust/id1608380682",
         category: "App Development",
         projectCategory: "Non-Profit Donation App",
       ),
@@ -64,7 +64,7 @@ class PortfolioController extends GetxController {
         duration: "4 Months",
            image: AppImages.iwilltillIm,
         description: "A unified telehealth platform offering on-demand access to licensed doctors and therapists for both medical and mental health support—affordable, convenient, and family-focused.",
-        playStore: "https://apps.apple.com/us/app/iwilltilimwell/id6443433690",
+        playStore: "https://play.google.com/store/apps/details?id=com.iwilltilimwella.app&hl=en",
         appStore: "https://apps.apple.com/us/app/iwilltilimwell/id6443433690",
         category: "App Development",
         projectCategory: "Health & Fitness",

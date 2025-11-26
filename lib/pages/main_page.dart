@@ -9,6 +9,7 @@ import 'package:portfolio_app/utils/sizes.dart';
 import '../controllers/nav_controller.dart';
 import '../controllers/theme_controller.dart';
 import '../utils/app_colors.dart';
+import '../widgets/connect_button.dart';
 import '../widgets/profile_card.dart';
 import 'contact_section.dart';
 import 'home_section.dart';
@@ -31,96 +32,94 @@ class MainPage extends StatelessWidget {
 
       drawer: isMobile
           ? Drawer(
-        backgroundColor: AppColors.darkColor,
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: const ProfileCard(
-              name: AppStrings.name,
-              title: AppStrings.title,
-              image: AppImages.profileImg,
-            ),
-          ),
-        ),
-      )
+              backgroundColor: AppColors.darkColor,
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(20),
+                  child: const ProfileCard(
+                    name: AppStrings.name,
+                    title: AppStrings.title,
+                    image: AppImages.profileImg,
+                  ),
+                ),
+              ),
+            )
           : null,
 
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF000515),
-              Color(0xFF0A0F29),
-            ],
+            colors: [Color(0xFF000515), Color(0xFF0A0F29)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: SafeArea(
-          child: Column(
-            children: [
-              // Top bar
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child:
+              Column(
                 children: [
+                  // Top bar
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      if (isMobile)
-                        Builder(
-                          builder: (context) => IconButton(
-                            icon: const Icon(
-                              Icons.menu,
-                              size: 30,
-                              color: AppColors.primary,
+                      Row(
+                        children: [
+                          if (isMobile)
+                            Builder(
+                              builder: (context) => ShaderMask(
+                                shaderCallback: (bounds) => AppColors.buttonGradient .createShader(bounds),
+                                child: IconButton(
+                                  icon: const Icon(
+                                    Icons.menu,
+                                    size: 30,
+                                    color: Colors.pinkAccent,
+                                  ),
+                                  onPressed: () =>
+                                      Scaffold.of(context).openDrawer(),
+                                ),
+                              ),
                             ),
-                            onPressed: () => Scaffold.of(context).openDrawer(),
-                          ),
-                        ),
 
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.easeOut,
-                        width: isMobile ? Get.width * 0.6 : Get.width * 0.2,
-                        child: ShaderMask(
-                          shaderCallback: (bounds) => const LinearGradient(
-                            colors: [
-                              Color(0xFFFF9C1A),
-                              Color(0xFFF63D2E),
-                            ],
-                          ).createShader(bounds),
-                          child: Text(
-                            AppStrings.name,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.sacramento(
-                              fontSize: isMobile ? 26 : 40,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          AnimatedContainer(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.easeOut,
+                            width: isMobile ? Get.width * 0.5 : Get.width * 0.25,
+                            child: ShaderMask(
+                              shaderCallback: (bounds) => AppColors.buttonGradient .createShader(bounds),
+                              child: Text(
+                                AppStrings.name,
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.sacramento(
+                                  fontSize: isMobile ? 26 : 40,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      ).paddingOnly(top: isMobile ? AppSizes.sm : 0),
-                    ],
-                  ),
+                          ).paddingOnly(top: isMobile ? AppSizes.sm : 0),
+                        ],
+                      ),
 
-                  IconButton(
+                      /*IconButton(
                     onPressed: () => themeC.toggleTheme(),
                     icon: const Icon(
                       Icons.brightness_6,
                       size: 24,
                       color: Colors.white,
                     ),
+                  ),*/
+                      const ConnectButton(),
+                    ],
+                  ).paddingOnly(bottom: AppSizes.md),
+
+                  Expanded(
+                    child: isMobile ? _mobileLayout(nav) : _desktopLayout(nav),
                   ),
                 ],
-              ).paddingOnly(bottom: AppSizes.md),
-
-              Expanded(
-                child: isMobile ? _mobileLayout(nav) : _desktopLayout(nav),
+              ).paddingSymmetric(
+                horizontal: isMobile ? AppSizes.sm : AppSizes.md,
+                vertical: isMobile ? AppSizes.sm : AppSizes.md,
               ),
-            ],
-          ).paddingSymmetric(
-            horizontal: isMobile ? AppSizes.sm : AppSizes.md,
-            vertical: isMobile ? AppSizes.sm : AppSizes.md,
-          ),
         ),
       ),
     );
@@ -214,7 +213,7 @@ class MainPage extends StatelessWidget {
               ],
             ),
             child: Obx(
-                  () => AnimatedSwitcher(
+              () => AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 switchInCurve: Curves.easeOutQuart,
                 switchOutCurve: Curves.easeInQuart,
@@ -231,9 +230,10 @@ class MainPage extends StatelessWidget {
   // --------- CUSTOM COOL TRANSITION ---------
   Widget _coolTransition(Widget child, Animation<double> animation) {
     final fade = Tween<double>(begin: 0, end: 1).animate(animation);
-    final scale = Tween<double>(begin: 0.95, end: 1.0).animate(
-      CurvedAnimation(parent: animation, curve: Curves.easeOutBack),
-    );
+    final scale = Tween<double>(
+      begin: 0.95,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutBack));
     final slide = Tween<Offset>(
       begin: const Offset(0.05, 0),
       end: Offset.zero,

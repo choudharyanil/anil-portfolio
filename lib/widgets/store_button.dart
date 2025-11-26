@@ -27,16 +27,17 @@ class StoreButtons extends StatelessWidget {
 
     return Row(
       children: [
-        if (playStoreUrl != null|| playStoreUrl!="")
+        if (playStoreUrl?.isNotEmpty == true)
           _storeButton(image: AppImages.googlePlay, url: playStoreUrl!),
 
-        if (appStoreUrl != null|| appStoreUrl!="")
+        if (appStoreUrl?.isNotEmpty == true)
           Padding(
             padding: const EdgeInsets.only(left: 12),
             child: _storeButton(image: AppImages.appStore, url: appStoreUrl!),
           ),
       ],
     );
+
   }
 
   // ------------------------------------------------------

@@ -15,17 +15,13 @@ class HomeSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // ---------------- ABOUT ME TITLE ----------------
-          ShaderMask(
-            shaderCallback: (bounds) => AppColors.buttonGradient
-                .createShader(bounds),
-            child: const Text(
-              "ABOUT ME",
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 1.3,
-                color: Colors.white,
-              ),
+          const Text(
+            "ABOUT ME",
+            style: TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.w700,
+              letterSpacing: 1.3,
+              color: Colors.white,
             ),
           ),
 

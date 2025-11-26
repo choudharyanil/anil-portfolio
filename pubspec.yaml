@@ -41,6 +41,7 @@ dependencies:
   url_launcher: ^6.3.2
   font_awesome_flutter: ^10.12.0
   auto_size_text: ^3.0.0
+  font_awesome_icon_class:
 
 dev_dependencies:
   flutter_test:

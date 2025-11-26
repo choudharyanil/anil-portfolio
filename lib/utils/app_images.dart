@@ -1,5 +1,5 @@
 class AppImages {
-  static const profileImg = 'assets/images/profile.jpeg';
+  static const profileImg = 'assets/images/profile.png';
   static const googlePlay = 'assets/images/google_play.png';
   static const appStore = 'assets/images/app_store.png';
 

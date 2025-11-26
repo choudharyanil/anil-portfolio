@@ -17,24 +17,17 @@ class TopNavBar extends StatelessWidget {
     return Column(
       children: [
         Obx(
-              () => Align(
-            alignment: isMobile
-                ? Alignment.centerLeft
-                : Alignment.centerRight,
+          () => Align(
+            alignment: isMobile ? Alignment.centerLeft : Alignment.centerRight,
             child: Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 14,
-                vertical: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.05),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              decoration:  isMobile?null:BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.05),
                 borderRadius: BorderRadius.circular(40),
-                border: Border.all(
-                  color: Colors.white.withOpacity(0.15),
-                ),
+                border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.primary.withOpacity(0.35),
+                    color: AppColors.primary.withValues(alpha: 0.35),
                     blurRadius: 18,
                     spreadRadius: 1,
                   ),
@@ -101,12 +94,12 @@ class TopNavBar extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
           boxShadow: active
               ? [
-            BoxShadow(
-              color: AppColors.primary.withOpacity(0.6),
-              blurRadius: 20,
-              spreadRadius: 3,
-            )
-          ]
+                  BoxShadow(
+                    color: AppColors.primary.withOpacity(0.6),
+                    blurRadius: 20,
+                    spreadRadius: 3,
+                  ),
+                ]
               : [],
         ),
         child: Row(
