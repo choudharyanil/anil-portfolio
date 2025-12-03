@@ -18,103 +18,107 @@ class WorkSection extends StatelessWidget {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+      child: SizedBox(
+        width: Get.width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
 
-          Text(
-            "Portfolio",
-            style: theme.textTheme.headlineSmall?.copyWith(
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
+            Text(
+              "Portfolio",
+              style: theme.textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
             ),
-          ),
 
-          const SizedBox(height: 6),
+            const SizedBox(height: 6),
 
-          Container(
-            height: 3,
-            width: 130,
-            decoration: BoxDecoration(
-              gradient: AppColors.buttonGradient,
-              borderRadius: BorderRadius.circular(4),
+            Container(
+              height: 3,
+              width: 130,
+              decoration: BoxDecoration(
+                gradient: AppColors.buttonGradient,
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
-          ),
 
-          const SizedBox(height: 26),
+            const SizedBox(height: 26),
 
-          // ---------------- FILTER CHIPS ----------------
-          Obx(() {
-            return Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: portfolio.categories.map((c) {
-                final bool isSelected = portfolio.selectedCategory.value == c;
+            // ---------------- FILTER CHIPS ----------------
+            Obx(() {
+              return Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: portfolio.categories.map((c) {
+                  final bool isSelected = portfolio.selectedCategory.value == c;
 
-                return GestureDetector(
-                  onTap: () => portfolio.selectCategory(c),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                    decoration: BoxDecoration(
-                      gradient: isSelected ? AppColors.buttonGradient : null,
-                      color: isSelected ? null : Colors.white.withValues(alpha: 0.06),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.white24),
-                      boxShadow: isSelected
-                          ? [
-                        BoxShadow(
-                          color: Colors.pinkAccent.withValues(alpha: .3),
-                          blurRadius: 15,
-                          offset: const Offset(0, 4),
-                        )
-                      ]
-                          : [],
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          _chipIcon(c),
-                          size: 18,
-                          color: isSelected ? Colors.white : Colors.white70,
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          c,
-                          style: TextStyle(
-                            fontSize: 13,
+                  return GestureDetector(
+                    onTap: () => portfolio.selectCategory(c),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      decoration: BoxDecoration(
+                        gradient: isSelected ? AppColors.buttonGradient : null,
+                        color: isSelected ? null : Colors.white.withValues(alpha: 0.06),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.white24),
+                        boxShadow: isSelected
+                            ? [
+                          BoxShadow(
+                            color: Colors.pinkAccent.withValues(alpha: .3),
+                            blurRadius: 15,
+                            offset: const Offset(0, 4),
+                          )
+                        ]
+                            : [],
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _chipIcon(c),
+                            size: 18,
                             color: isSelected ? Colors.white : Colors.white70,
-                            fontWeight: FontWeight.w600,
                           ),
-                        ),
-                      ],
+                          const SizedBox(width: 6),
+                          Text(
+                            c,
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: isSelected ? Colors.white : Colors.white70,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              }).toList(),
-            );
-          }),
+                  );
+                }).toList(),
+              );
+            }),
 
-          const SizedBox(height: 28),
+            const SizedBox(height: 28),
 
-          // ---------------- PROJECT CARDS ----------------
-          Obx(() {
-            return Wrap(
-              spacing: 22,
-              runSpacing: 22,
-              children: portfolio.filteredProjects.map((p) {
-                return SizedBox(
-                  width: isMobile ? double.infinity : 340,
-                  child: InkWell(
-                    onTap: () => Get.to(() => ProjectDetailPage(project: p)),
-                    child: ProjectCard(project: p),     // Uses glass style already
-                  ),
-                );
-              }).toList(),
-            );
-          }),
-        ],
+            // ---------------- PROJECT CARDS ----------------
+            Obx(() {
+              return Wrap(
+                spacing: 22,
+                runSpacing: 22,
+                children: portfolio.filteredProjects.map((p) {
+                  return SizedBox(
+                    width: isMobile ? double.infinity : 340,
+                    child: InkWell(
+                      onTap: () => Get.to(() => ProjectDetailPage(project: p)),
+                      child: ProjectCard(project: p),     // Uses glass style already
+                    ),
+                  );
+                }).toList(),
+              );
+            }),
+          ],
+        ),
       ),
     );
   }

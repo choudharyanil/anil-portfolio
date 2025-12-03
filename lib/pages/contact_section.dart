@@ -126,7 +126,10 @@ class ContactSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: Colors.pinkAccent, size: 28),
+          ShaderMask(
+              shaderCallback: (bounds) =>
+                  AppColors.buttonGradient.createShader(bounds),
+              child: Icon(icon, size: 28)),
           const SizedBox(height: 10),
           Text(
             title,

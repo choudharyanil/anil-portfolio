@@ -36,10 +36,10 @@ class MainPage extends StatelessWidget {
               child: SafeArea(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(20),
-                  child: const ProfileCard(
-                    name: AppStrings.name,
-                    title: AppStrings.title,
-                    image: AppImages.profileImg,
+                  child: const ProfileSidebar(
+                    // name: AppStrings.name,
+                    // title: AppStrings.title,
+                    // image: AppImages.profileImg,
                   ),
                 ),
               ),
@@ -139,20 +139,20 @@ class MainPage extends StatelessWidget {
             child: Opacity(opacity: 1 - (value / -40), child: child),
           ),
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.4),
-                  blurRadius: 22,
-                  spreadRadius: 1,
-                ),
-              ],
-            ),
-            child: const ProfileCard(
-              name: AppStrings.name,
-              title: AppStrings.title,
-              image: AppImages.profileImg,
+            // decoration: BoxDecoration(
+            //   borderRadius: BorderRadius.circular(20),
+            //   boxShadow: [
+            //     BoxShadow(
+            //       color: AppColors.primary.withValues(alpha: 0.4),
+            //       blurRadius: 22,
+            //       spreadRadius: 1,
+            //     ),
+            //   ],
+            // ),
+            child: const ProfileSidebar(
+              // name: AppStrings.name,
+              // title: AppStrings.title,
+              // image: AppImages.profileImg,
             ),
           ),
         ),
@@ -197,21 +197,7 @@ class MainPage extends StatelessWidget {
               horizontal: 30,
               vertical: AppSizes.xl,
             ),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: [Color(0xFF101526), Color(0xFF0B1120)],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              borderRadius: BorderRadius.circular(22),
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.primary.withOpacity(0.5),
-                  blurRadius: 25,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
+            decoration:AppColors.cardDecoration,
             child: Obx(
               () => AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppColors {
   // static const primary = Color(0xFFFF9C1A);  // Orange accent
   static const primary = bgColor;  // Orange accent
+
+
   static const primaryDark = Color(0xFFF63D2E); // Orange accent
   // static const bgLight = Color(0xFFF2F5F9); // Light grey page background
   static const bgLight = bgColor; // Light grey page background
@@ -29,5 +31,21 @@ class AppColors {
     colors: [Colors.pinkAccent, Colors.blue],
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
+  );
+
+  static Decoration? get cardDecoration => BoxDecoration(
+    gradient: const LinearGradient(
+      colors: [Color(0xFF101526), Color(0xFF0B1120)],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+    borderRadius: BorderRadius.circular(22),
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.primary.withOpacity(0.5),
+        blurRadius: 25,
+        spreadRadius: 2,
+      ),
+    ],
   );
 }
