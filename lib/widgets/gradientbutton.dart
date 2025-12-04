@@ -4,7 +4,7 @@ import '../utils/app_colors.dart';
 class GradientButton extends StatelessWidget {
   final String text;
   final IconData? icon;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const GradientButton({
     super.key,

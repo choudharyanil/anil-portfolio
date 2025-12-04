@@ -139,13 +139,13 @@ class ResumeSection extends StatelessWidget {
             runSpacing: 12,
             children: const [
               SkillChip("Team Collaboration"),
-              SkillChip("Leadership"),
               SkillChip("Problem Solving"),
+              SkillChip("Adaptability"),
+              SkillChip("Creativity"),
               SkillChip("Communication"),
               SkillChip("Time Management"),
               SkillChip("Mentorship"),
-              SkillChip("Adaptability"),
-              SkillChip("Creativity"),
+
             ],
           ),
 
@@ -154,22 +154,23 @@ class ResumeSection extends StatelessWidget {
           //---------------------------------------------------------
           // EXPERIENCE + EDUCATION
           //---------------------------------------------------------
-          isMobile
-              ? Column(
-            children: [
-              _experienceBlock(context),
-              const SizedBox(height: 30),
-              _educationBlock(context),
-            ],
-          )
-              : Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(child: _experienceBlock(context)),
-              const SizedBox(width: 40),
-              Expanded(child: _educationBlock(context)),
-            ],
-          ),
+          _educationBlock(context),
+          // isMobile
+          //     ? Column(
+          //   children: [
+          //     _experienceBlock(context),
+          //     const SizedBox(height: 30),
+          //     _educationBlock(context),
+          //   ],
+          // )
+          //     : Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Expanded(child: _experienceBlock(context)),
+          //     const SizedBox(width: 40),
+          //     Expanded(child: _educationBlock(context)),
+          //   ],
+          // ),
 
           //---------------------------------------------------------
           // PROJECTS
