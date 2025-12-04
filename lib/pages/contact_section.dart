@@ -1,13 +1,104 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:portfolio_app/utils/app_colors.dart';
 import 'package:portfolio_app/utils/app_strings.dart';
+import 'package:portfolio_app/utils/alert_helper.dart';
 import 'package:portfolio_app/widgets/gradientbutton.dart';
-
 import '../utils/sizes.dart';
 
-class ContactSection extends StatelessWidget {
+class ContactSection extends StatefulWidget {
   const ContactSection({super.key});
+
+  @override
+  State<ContactSection> createState() => _ContactSectionState();
+}
+
+class _ContactSectionState extends State<ContactSection> {
+  final TextEditingController nameCtrl = TextEditingController();
+  final TextEditingController emailCtrl = TextEditingController();
+  final TextEditingController msgCtrl = TextEditingController();
+
+  bool isLoading = false;
+
+  // ------------ EMAIL VALIDATION ------------
+  bool _isValidEmail(String email) {
+    return RegExp(r"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$").hasMatch(email);
+  }
+
+  // ------------ SEND EMAIL TO FORMSUBMIT ------------
+  // Future<bool> sendEmail() async {
+  //   final url = Uri.parse("https://formsubmit.co/ajax/kumaranilkumar432@gmail.com");
+  //
+  //   final response = await http.post(
+  //     url,
+  //     headers: {"Content-Type": "application/json"},
+  //     body: jsonEncode({
+  //       "name": nameCtrl.text.trim(),
+  //       "email": emailCtrl.text.trim(),
+  //       "message": msgCtrl.text.trim(),
+  //       "_captcha": "false",
+  //     }),
+  //   );
+  //
+  //   return response.statusCode == 200;
+  // }
+  Future<bool> sendEmail() async {
+    final url = Uri.parse(
+      "https://formsubmit.co/ajax/5cb719388e13272e3a99e341e0d392c3",
+    );
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          "name": nameCtrl.text.trim(),
+          "email": emailCtrl.text.trim(),
+          "message": msgCtrl.text.trim(),
+          "_captcha": "false",
+        }),
+      );
+
+      return response.statusCode == 200;
+    } catch (e) {
+      debugPrint("Email send error: $e");
+      return false;
+    }
+  }
+
+
+  Future<void> submitForm() async {
+    if (nameCtrl.text.isEmpty ||
+        emailCtrl.text.isEmpty ||
+        msgCtrl.text.isEmpty) {
+      AlertHelper.error("Missing Fields", "Please fill all fields");
+      return;
+    }
+
+    if (!_isValidEmail(emailCtrl.text)) {
+      AlertHelper.warning("Invalid Email", "Please enter a valid email address");
+      return;
+    }
+
+    setState(() => isLoading = true);
+
+    bool ok = await sendEmail();
+
+    setState(() => isLoading = false);
+
+    if (ok) {
+      AlertHelper.success("Success", "Message sent successfully!");
+      nameCtrl.clear();
+      emailCtrl.clear();
+      msgCtrl.clear();
+    } else {
+      AlertHelper.error("Error", "Something went wrong. Please try again.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,28 +131,23 @@ class ContactSection extends StatelessWidget {
           // ---------------- CONTACT CARDS ----------------
           isMobile
               ? Column(
-            mainAxisSize: MainAxisSize.max,
-                  children: [
-                    _contactItem(Icons.phone, "Phone", [AppStrings.phone]),
-                    const SizedBox(height: 20),
-                    _contactItem(Icons.email, "Email", [AppStrings.email]),
-                  ],
-                )
+            children: [
+              _contactItem(Icons.phone, "Phone", [AppStrings.phone]),
+              const SizedBox(height: 20),
+              _contactItem(Icons.email, "Email", [AppStrings.email]),
+            ],
+          )
               : Row(
-                  children: [
-                    Expanded(
-                      child: _contactItem(Icons.phone, "Phone", [
-                        AppStrings.phone,
-                      ]),
-                    ),
-                    const SizedBox(width: 24),
-                    Expanded(
-                      child: _contactItem(Icons.email, "Email", [
-                        AppStrings.email,
-                      ]),
-                    ),
-                  ],
-                ),
+            children: [
+              Expanded(
+                child: _contactItem(Icons.phone, "Phone", [AppStrings.phone]),
+              ),
+              const SizedBox(width: 24),
+              Expanded(
+                child: _contactItem(Icons.email, "Email", [AppStrings.email]),
+              ),
+            ],
+          ),
 
           const SizedBox(height: 40),
 
@@ -90,13 +176,17 @@ class ContactSection extends StatelessWidget {
 
                 const SizedBox(height: 24),
 
-                _textField("Name"),
-                _textField("Email"),
-                _textField("Message", maxLines: 4),
+                _textField("Name", controller: nameCtrl),
+                _textField("Email", controller: emailCtrl),
+                _textField("Message", maxLines: 4, controller: msgCtrl),
 
                 const SizedBox(height: 12),
 
-                GradientButton(text: "Submit", onTap: () {}, icon: Icons.send),
+                GradientButton(
+                  text: isLoading ? "Sending..." : "Submit",
+                  icon: isLoading ? Icons.hourglass_empty : Icons.send,
+                  onTap: isLoading ? () {} : submitForm,
+                ),
               ],
             ),
           ),
@@ -129,7 +219,7 @@ class ContactSection extends StatelessWidget {
           ShaderMask(
               shaderCallback: (bounds) =>
                   AppColors.buttonGradient.createShader(bounds),
-              child: Icon(icon, size: 28)),
+              child: Icon(icon, size: 28, color: Colors.white)),
           const SizedBox(height: 10),
           Text(
             title,
@@ -141,7 +231,7 @@ class ContactSection extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           ...lines.map(
-            (e) => Text(
+                (e) => Text(
               e,
               style: const TextStyle(color: Colors.white70, fontSize: 14),
             ),
@@ -152,7 +242,8 @@ class ContactSection extends StatelessWidget {
   }
 
   // ---------------- FORM FIELD ----------------
-  Widget _textField(String label, {int maxLines = 1}) {
+  Widget _textField(String label,
+      {int maxLines = 1, required TextEditingController controller}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -163,15 +254,14 @@ class ContactSection extends StatelessWidget {
         const SizedBox(height: 6),
 
         TextField(
+          controller: controller,
           maxLines: maxLines,
           style: const TextStyle(color: Colors.white),
           decoration: InputDecoration(
             filled: true,
             fillColor: Colors.white.withValues(alpha: .05),
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: 12,
-              horizontal: 14,
-            ),
+            contentPadding:
+            const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: Colors.white24),
