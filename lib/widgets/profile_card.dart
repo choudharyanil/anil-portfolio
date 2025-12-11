@@ -118,9 +118,9 @@ class ProfileSidebar extends StatelessWidget {
             // -----------------------------------------------------
             // LANGUAGES (ONLY ENGLISH + HINDI)
             // -----------------------------------------------------
-            _sectionTitle("Languages"),
-            _progressItem("English", 0.90),
-            _progressItem("Hindi", 1.0),
+            // _sectionTitle("Languages"),
+            // _progressItem("English", 0.90),
+            // _progressItem("Hindi", 1.0),
 
             const SizedBox(height: 16),
 

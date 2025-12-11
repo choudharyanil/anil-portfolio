@@ -205,15 +205,15 @@ class ResumeSection extends StatelessWidget {
           //---------------------------------------------------------
           // CERTIFICATIONS
           //---------------------------------------------------------
-          const SizedBox(height: 40),
-          Text("Certifications",
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              )),
-
-          const SizedBox(height: 16),
-          const SkillChip("Employee Of The Quarter"),
+          // const SizedBox(height: 40),
+          // Text("Certifications",
+          //     style: theme.textTheme.titleLarge?.copyWith(
+          //       fontWeight: FontWeight.bold,
+          //       color: Colors.white,
+          //     )),
+          //
+          // const SizedBox(height: 16),
+          // const SkillChip("Employee Of The Quarter"),
 
           //---------------------------------------------------------
           // LANGUAGES + HOBBIES
