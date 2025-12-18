@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
               child: SafeArea(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(20),
-                  child: const ProfileSidebar(
+                  child: const ProfileCard(
                     // name: AppStrings.name,
                     // title: AppStrings.title,
                     // image: AppImages.profileImg,
@@ -162,7 +162,7 @@ class MainPage extends StatelessWidget {
         // ---------------- LEFT COLUMN (PROFILE) ----------------
         SizedBox(
           width: 300,
-          child: const ProfileSidebar(),
+          child: const ProfileCard(),
         ),
 
         const SizedBox(width: 25),

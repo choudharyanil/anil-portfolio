@@ -11,8 +11,8 @@ import '../utils/app_images.dart';
 import '../utils/app_strings.dart';
 import '../widgets/gradientbutton.dart';
 
-class ProfileSidebar extends StatelessWidget {
-  const ProfileSidebar({super.key});
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +20,9 @@ class ProfileSidebar extends StatelessWidget {
     final neon = theme.extension<NeonTheme>()!;
 
     return Container(
-      width: Get.width * 0.24,
-      padding: const EdgeInsets.symmetric(horizontal: AppSizes.md),
-      decoration: AppColors.cardDecoration,
+      width: ResponsiveHelper.isMobile(context)? Get.width * 0.90: Get.width * 0.6,
+      padding:ResponsiveHelper.isMobile(context)?null: const EdgeInsets.symmetric(horizontal: AppSizes.md),
+      decoration: ResponsiveHelper.isMobile(context)?null:AppColors.cardDecoration,
       child: SingleChildScrollView(
         child: Column(
           children: [
