@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:portfolio_app/utils/sizes.dart';
 import 'package:portfolio_app/widgets/responsive_widget.dart';
+import 'package:portfolio_app/widgets/social_icon.dart';
 
 import '../themes/neon_theme.dart';
 import '../utils/app_colors.dart';
@@ -34,7 +36,7 @@ class ProfileSidebar extends StatelessWidget {
                         onPressed: () {
                           Navigator.of(context).pop(); // Close drawer
                         },
-                        icon: Icon(Icons.close,size: 24,),
+                        icon: Icon(Icons.close, size: 24),
                       ),
                     ),
                   )
@@ -90,10 +92,19 @@ class ProfileSidebar extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _social(Icons.facebook),
-                _social(Icons.link),
-                _social(Icons.code),
-                _social(Icons.person),
+                SocialIcon(
+                  icon: FontAwesomeIcons.linkedin,
+                  url: AppStrings.linkedInURL,
+                ),
+                SocialIcon(
+                  icon: FontAwesomeIcons.whatsapp,
+                  url: AppStrings.whatsAppUrl,
+                ),
+                SocialIcon(
+                  icon: FontAwesomeIcons.github,
+                  url: AppStrings.githubURL,
+                ),
+                // _social(Icons.person),
               ],
             ),
 
@@ -121,7 +132,6 @@ class ProfileSidebar extends StatelessWidget {
             // _sectionTitle("Languages"),
             // _progressItem("English", 0.90),
             // _progressItem("Hindi", 1.0),
-
             const SizedBox(height: 16),
 
             // -----------------------------------------------------
@@ -278,21 +288,6 @@ class ProfileSidebar extends StatelessWidget {
           const SizedBox(width: 6),
           Expanded(child: Text(text, style: const TextStyle(fontSize: 13))),
         ],
-      ),
-    );
-  }
-
-  Widget _social(IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 6),
-      child: ShaderMask(
-        shaderCallback: (bounds) =>
-            AppColors.buttonGradient.createShader(bounds),
-        child: CircleAvatar(
-          radius: 18,
-          backgroundColor: Colors.white.withValues(alpha: .10),
-          child: Icon(icon, size: 18, color: Colors.white),
-        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:portfolio_app/utils/sizes.dart';
 import '../utils/app_colors.dart';
+import '../widgets/about_me.dart';
 
 class HomeSection extends StatelessWidget {
   const HomeSection({super.key});
@@ -46,19 +47,7 @@ class HomeSection extends StatelessWidget {
           const SizedBox(height: 22),
 
           // ---------------- ABOUT TEXT ----------------
-          const Text(
-            "I’m a passionate Flutter developer with more than 6+ years of experience "
-                "crafting elegant and high-performance mobile applications.\n\n"
-                "I love transforming ideas into seamless user experiences, solving complex "
-                "problems through clean architecture, and delivering products with real impact. "
-                "Always learning & pushing the boundaries of what's possible with Flutter.",
-            style: TextStyle(
-              height: 1.6,
-              wordSpacing: 3,
-              fontSize: 15,
-              color: Colors.white,
-            ),
-          ),
+            const AboutMeAnimated(),
 
           const SizedBox(height: 40),
 
@@ -181,8 +170,8 @@ class _SkillCardState extends State<SkillCard> {
           ),
           gradient: LinearGradient(
             colors: [
-              Colors.white.withOpacity(0.05),
-              Colors.white.withOpacity(0.02),
+              Colors.white.withValues(alpha: 0.05),
+              Colors.white.withValues(alpha: 0.02),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -190,14 +179,14 @@ class _SkillCardState extends State<SkillCard> {
           boxShadow: isHovered
               ? [
             BoxShadow(
-              color: Colors.blueAccent.withOpacity(0.6),
+              color:Colors.pinkAccent.withValues(alpha: 0.01),
               blurRadius: 25,
               spreadRadius: 4,
             )
           ]
               : [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color:AppColors.secondaryColor.withValues(alpha:0.25),
               blurRadius: 12,
               offset: const Offset(0, 6),
             )

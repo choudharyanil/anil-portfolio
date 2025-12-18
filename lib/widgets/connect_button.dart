@@ -16,8 +16,8 @@ class ConnectButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(AppSizes.sm),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: AppSizes.md,
-          vertical: AppSizes.sm,
+          horizontal:  AppSizes.md,
+          vertical:   AppSizes.sm,
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppSizes.md),

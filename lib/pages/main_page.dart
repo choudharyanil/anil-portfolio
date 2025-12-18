@@ -9,6 +9,7 @@ import 'package:portfolio_app/utils/sizes.dart';
 import '../controllers/nav_controller.dart';
 import '../controllers/theme_controller.dart';
 import '../utils/app_colors.dart';
+import '../widgets/animated_footer.dart';
 import '../widgets/connect_button.dart';
 import '../widgets/profile_card.dart';
 import 'contact_section.dart';
@@ -59,7 +60,7 @@ class MainPage extends StatelessWidget {
               Column(
                 children: [
                   // Top bar
-                  Row(
+                  if (isMobile)  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -80,34 +81,25 @@ class MainPage extends StatelessWidget {
                               ),
                             ),
 
-                          AnimatedContainer(
-                            duration: const Duration(milliseconds: 600),
-                            curve: Curves.easeOut,
-                            width: isMobile ? Get.width * 0.5 : Get.width * 0.25,
-                            child: ShaderMask(
-                              shaderCallback: (bounds) => AppColors.buttonGradient .createShader(bounds),
-                              child: Text(
-                                AppStrings.name,
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.sacramento(
-                                  fontSize: isMobile ? 26 : 40,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ).paddingOnly(top: isMobile ? AppSizes.sm : 0),
+                          // AnimatedContainer(
+                          //   duration: const Duration(milliseconds: 600),
+                          //   curve: Curves.easeOut,
+                          //   width: isMobile ? Get.width * 0.5 : Get.width * 0.25,
+                          //   child: ShaderMask(
+                          //     shaderCallback: (bounds) => AppColors.buttonGradient .createShader(bounds),
+                          //     child: Text(
+                          //       AppStrings.name,
+                          //       textAlign: TextAlign.center,
+                          //       style: GoogleFonts.sacramento(
+                          //         fontSize: isMobile ? 26 : 40,
+                          //         fontWeight: FontWeight.w600,
+                          //         color: Colors.white,
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ).paddingOnly(top: isMobile ? AppSizes.sm : 0),
                         ],
                       ),
-
-                      /*IconButton(
-                    onPressed: () => themeC.toggleTheme(),
-                    icon: const Icon(
-                      Icons.brightness_6,
-                      size: 24,
-                      color: Colors.white,
-                    ),
-                  ),*/
                       const ConnectButton(),
                     ],
                   ).paddingOnly(bottom: AppSizes.md),
@@ -115,6 +107,7 @@ class MainPage extends StatelessWidget {
                   Expanded(
                     child: isMobile ? _mobileLayout(nav) : _desktopLayout(nav),
                   ),
+                  const AnimatedFooter(),
                 ],
               ).paddingSymmetric(
                 horizontal: isMobile ? AppSizes.sm : AppSizes.md,
@@ -126,7 +119,7 @@ class MainPage extends StatelessWidget {
   }
 
   // ------- Desktop Layout -------
-  Widget _desktopLayout(NavController nav) {
+  /*Widget _desktopLayout(NavController nav) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -160,7 +153,50 @@ class MainPage extends StatelessWidget {
         Expanded(child: _contentBox(nav)),
       ],
     );
+  }*/
+
+  Widget _desktopLayout(NavController nav) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // ---------------- LEFT COLUMN (PROFILE) ----------------
+        SizedBox(
+          width: 300,
+          child: const ProfileSidebar(),
+        ),
+
+        const SizedBox(width: 25),
+
+        // ---------------- RIGHT COLUMN ----------------
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // ---------- ROW 1 : NAVIGATION + WHATSAPP ----------
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+
+                children: const [
+                  // LEFT → Menu Items
+                  TopNavBar(),
+
+                  // RIGHT → WhatsApp Button
+                  ConnectButton(),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // ---------- ROW 2 : CONTENT SECTION ----------
+              Expanded(child: _contentBox(nav)),
+            ],
+          ),
+        ),
+      ],
+    );
   }
+
+
 
   // ------- Mobile Layout -------
   Widget _mobileLayout(NavController nav) {
@@ -189,8 +225,6 @@ class MainPage extends StatelessWidget {
   Widget _contentBox(NavController nav) {
     return Column(
       children: [
-        const TopNavBar(),
-        const SizedBox(height: AppSizes.sm),
         Expanded(
           child: Container(
             padding: const EdgeInsets.symmetric(

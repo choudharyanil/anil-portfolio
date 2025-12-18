@@ -21,18 +21,18 @@ class TopNavBar extends StatelessWidget {
             alignment: isMobile ? Alignment.centerLeft : Alignment.centerRight,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-              decoration:  isMobile?null:BoxDecoration(
-                color: Colors.white.withValues(alpha: 0.05),
-                borderRadius: BorderRadius.circular(40),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(alpha: 0.35),
-                    blurRadius: 18,
-                    spreadRadius: 1,
-                  ),
-                ],
-              ),
+              // decoration:  isMobile?null:BoxDecoration(
+              //   color: Colors.white.withValues(alpha: 0.05),
+              //   borderRadius: BorderRadius.circular(40),
+              //   border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+              //   boxShadow: [
+              //     BoxShadow(
+              //       color: AppColors.primary.withValues(alpha: 0.35),
+              //       blurRadius: 18,
+              //       spreadRadius: 1,
+              //     ),
+              //   ],
+              // ),
               child: isMobile ? _scrollableTabs(nav) : _centerTabs(nav),
             ),
           ),
